@@ -118,33 +118,42 @@ function getRandomElement(array) {
 
 function generatePassword() {
   var pwdOptions = getPasswordOptions();
-  console.log(pwdOptions);
   var finalResult = [];
   var possibleChar = [];
   var guaranteedChar = [];
   if (pwdOptions.specialChar) {
     possibleChar = possibleChar.concat(specialCharArray);
     guaranteedChar.push(getRandomElement(specialCharArray));
-    console.log(possibleChar);
   }
+  if (pwdOptions.lowerCase) {
+    possibleChar = possibleChar.concat(lowerCharArray);
+    guaranteedChar.push(getRandomElement(lowerCharArray));
+  }
+  if (pwdOptions.upperCase) {
+    possibleChar = possibleChar.concat(upperCharArray);
+    guaranteedChar.push(getRandomElement(upperCharArray));
+  }
+  if (pwdOptions.numeric) {
+    possibleChar = possibleChar.concat(numericCharArray);
+    guaranteedChar.push(getRandomElement(numericCharArray));
+  }
+  // how to finish up an "if" loop ? do I need a return?
+
+  console.log(possibleChar);
+  console.log(guaranteedChar);
+
+  for (let i = 0; i < pwdOptions.length; i++) {
+    let character = getRandomElement(possibleChar);
+    finalResult.push(character);
+  }
+  for (let i = 0; i < guaranteedChar.length; i++) {
+    finalResult[i] = guaranteedChar[i];
+  }
+
+  return finalResult.join("");
+
+  // where to stringify characters before they're sent to generatePassword?
 }
-
-// getPasswordOptions();
-
-// if (length === "" || length === null || length < 8 || length > 128) {
-//   window.alert("Your password must be between 8 and 128 characters long.");
-// } else return length;
-// }
-// prompt asking which character types to include in the password (require at least one)
-// arrays for lowercase, uppercase, numeric, and special characters
-
-// function to generate password
-
-// function to display password
-
-// options that user wants
-// save those options in variable
-// create basedon options
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
